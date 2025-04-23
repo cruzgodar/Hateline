@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using Celeste.Mod.Hateline.CelesteNet;
 using FMOD.Studio;
+using Microsoft.Xna.Framework.Graphics;
 using Monocle;
 using MonoMod.ModInterop;
 
@@ -49,15 +51,16 @@ public class HatelineModule : EverestModule
     public static HashSet<string> hats = new();
 
     public Dictionary<string, Dictionary<string, string>> HatAttributes = new();
-    
+
     // Define custom hat attributes here
     private readonly Dictionary<string, string> _hatAttributeDefinitions = new()
     {
         // The name of the attribute and its default value
-        { "scaling", "true" }, 
+        { "scaling", "true" },
         { "flip", "true" },
-        {"tint", "false"},
-        {"hatOffset", "0,0"}
+        { "tint", "false" },
+        { "hatOffset", "0,0" },
+        { "mod", "unknown" }
     };
 
     public override void Load()
@@ -134,10 +137,16 @@ public class HatelineModule : EverestModule
             string hatName = spriteName[9..];
             XmlNode node = spriteData.Sources[0].XML;
             Dictionary<string, string> attributesToAdd = new();
-            
+
             foreach ((string attributeName, string defaultValue) in Instance._hatAttributeDefinitions)
                 attributesToAdd[attributeName] = node.Attributes?[attributeName]?.Value ?? defaultValue;
-            
+
+            if (attributesToAdd["mod"] == "unknown" && (spriteData.Sprite.Animations.Count > 0) &&
+                Everest.Content.TryGet("Graphics/Atlases/Gameplay/" + spriteData.Sprite.Animations.First().Value.Frames[0].ToString(), out ModAsset asset) && asset.Type == typeof(Texture2D))
+            {
+                attributesToAdd["mod"] = asset.Source.Name;
+            }
+
             Instance.HatAttributes[hatName] = attributesToAdd;
             
             if (hatName != HAT_NONE)

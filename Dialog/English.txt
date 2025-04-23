@@ -1,5 +1,6 @@
 HATELINE_SETTINGS_DEFAULT=None
 HATELINE_SETTINGS_CURHAT=Current Hat
+HATELINE_HAT_HATSFROM=Hats from
 
 HATELINE_HAT_NONE=None
 HATELINE_HAT_CYBER=Cyber's Crown
@@ -13,3 +14,8 @@ HATELINE_HAT_ZARO_NIKO=Niko's Hat
 HATELINE_HAT_ZARO_EEVEE=Mini Eevee
 HATELINE_HAT_CHEEPLING_HAIRBAND=Hair Band
 HATELINE_HAT_CHEEPLING_BOWS=Bows
+
+HATELINE_HAT_NEEDCONFIRM= If you want to switch to current hat, press confirm!
+HATELINE_HAT_CONFIRM= Switched to current hat.
+HATELINE_HAT_SESSIONHINT= The session covered the current hat.
+HATELINE_HAT_NOTENABLEDHINT= NOTE: The main enabled option is off now, trun it to on if you want to see the current hat.
