@@ -7,5 +7,3 @@
   OptionalDependencies:
     - Name: CelesteNet.Client
       Version: 2.3.1 
-    - Name: MotionSmoothing
-      Version: 1.5.6
